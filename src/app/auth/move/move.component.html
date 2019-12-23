@@ -1,0 +1,47 @@
+
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <mat-card class="example-card">
+   
+    <form [formGroup]="moveForm"  (ngSubmit)="onFormSubmit()" >
+  <table class="table table-bordered"  id="tableWords">
+
+  <thead >
+   <tr>
+     <th scope="col">Introduzca la ruta de origen y destino</th>
+    </tr>
+   </thead>
+     <tbody>
+     <tr>
+   <ng-container formArrayName="items" *ngFor="let item of moveForm.get('items')['controls']; let i = index">
+    <div [formGroupName]="i">
+        <input  hidden  class="form-control" type="text" formControlName="id"/>
+        <td> 
+          <input  type="checkbox"  formControlName="activecheck" value="D" />
+        </td>
+        <td> 
+        
+        <input  class="form-control"  type="text" placeholder="Origen" formControlName="originpath"/>
+      </td>
+     <td> 
+        <input  class="form-control" type="text" placeholder="Destino" formControlName="targetpath" />
+      </td><td>   
+        <button  type="button"  (click)="removeItem(i)"> <img src="/assets/img/delete.png"  alt="delete"/></button>
+     </td>
+      <td id="boton"> 
+       <button  type="button"  id="add" (click)="addFila()"> <img src="/assets/img/anadir.png"  alt="add"/></button>
+      </td>
+ </div>
+</ng-container>
+    </tr>   
+     </tbody>
+    </table>
+      <div class="button-row">
+        <button type="submit"  mat-flat-button color="primary">Move</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
